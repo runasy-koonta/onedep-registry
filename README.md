@@ -9,7 +9,7 @@ OneDep의 Registry 서비스입니다.
 
 ## Installation
 ### Requirements
-- [Docker](https://docs.docker.com/install/)
+- [Docker](https://docs.docker.com/install/) - 아래 커맨드를 통해 설치됩니다.
 
 ### Install
 ```bash
@@ -40,10 +40,11 @@ $ chmod 777 domain.key
 
 $ cd
 $ mkdir auth
+$ touch auth/htpasswd
 
 # Registry를 설치합니다.
 $ docker run -d -p 5000:5000 --restart=always --name registry \
-  -v /etc/letsencrypt/live/${instanceIpv4}.sslip.io:/certs \
+  -v /etc/letsencrypt/live/[도메인]:/certs \
   -v /opt/docker-registry:/var/lib/registry \
   -v `pwd`/auth:/auth \
   -e "REGISTRY_AUTH=htpasswd" \
@@ -62,6 +63,7 @@ $ pm2 start index.js
 
 ## Roadmap
 - [ ] Web에서 프로젝트를 관리할 수 있도록 합니다.
+- [ ] HTTPS 지원을 추가합니다.
 
 ## Contacts
 - [Minjun Kang](https://github.com/runasy-koonta) ([minjun@kaaang.dev](mailto:minjun@kaaang.dev))
